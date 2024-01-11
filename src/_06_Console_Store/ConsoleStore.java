@@ -1,6 +1,10 @@
+
 package _06_Console_Store;
 
+import _02_Generics_Store.*;
+
 public class ConsoleStore {
+	
 
     /*
      * Write a program that simulates shopping in a store using the Scanner and
@@ -35,7 +39,9 @@ public class ConsoleStore {
      * print out a receipt showing their name, the individual prices of the
      * items and their total.
      */
-
+	
+	Cart<Food> cart = new Cart<Food>();
+	
     public static void main(String[] args) {
 
     }

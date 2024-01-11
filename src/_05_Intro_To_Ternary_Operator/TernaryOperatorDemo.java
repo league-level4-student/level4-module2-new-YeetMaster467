@@ -1,5 +1,7 @@
 package _05_Intro_To_Ternary_Operator;
 
+import java.util.Scanner;
+
 public class TernaryOperatorDemo {
 
     /*
@@ -40,7 +42,16 @@ public class TernaryOperatorDemo {
          * until the response says "FIRE!".
          */
         
+        String input;
         
+        do {
+        	Scanner s = new Scanner(System.in);
+            System.out.println("What season is it?");
+            input = s.nextLine();
+            
+            input = input.equals("duck season") ? "FIRE!" : "rabbit season";
+            
+        } while (!input.equals("FIRE!"));
         
         /*
          * WARNING: Ternary operators can be used to improve the readability of

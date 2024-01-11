@@ -25,7 +25,7 @@ public class ScannerDemo {
          * are running your program or the input/output stream you are using.
          */
 
-        
+        Scanner s = new Scanner(System.in);
         
         /*
          * 2. Use a syso to ask the user for their name and then use the Scanner
@@ -41,7 +41,9 @@ public class ScannerDemo {
          * Note: Don't forget to save the results of next() or nextLine() into a
          * String variable.
          */
-
+        
+        System.out.println("What is your name?");
+        String name = s.nextLine();
         
         
         /*
@@ -51,7 +53,9 @@ public class ScannerDemo {
          * See if you can find the scanner method that does this without relying
          * on Integer.parseInt().
          */
-
+        
+        System.out.println("How old are you?");
+        int age = s.nextInt();
         
         
         /*
@@ -61,10 +65,19 @@ public class ScannerDemo {
          * Note: There are many methods similar to the one you used for int that
          * are capable of taking in primitive data types.
          */
+        
+        System.out.println("(true or false) Are you employed?");
+        boolean employed = s.nextBoolean();
 
         // 5.) Print the user's data to the console nicely formatted.
-
-        
+        System.out.println(" ");
+        System.out.println("Your name is " + name + ".");
+        System.out.println("You are " + age + " years old.");
+        if (employed) {
+        	System.out.println("You are employed");
+        } else {
+        	System.out.println("You are unemployed");
+        }
         
         /*
          * 6.) Close your scanner to avoid memory leaks.
@@ -72,6 +85,8 @@ public class ScannerDemo {
          * Note: When using a Scanner with the System.in input stream in larger
          * programs only close the scanner when your program is completely done.
          */
+        
+        s.close();
 
     }
 
