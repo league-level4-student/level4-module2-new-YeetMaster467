@@ -1,6 +1,8 @@
 
 package _06_Console_Store;
 
+import java.util.Scanner;
+
 import _02_Generics_Store.*;
 
 public class ConsoleStore {
@@ -40,10 +42,53 @@ public class ConsoleStore {
      * items and their total.
      */
 	
-	Cart<Food> cart = new Cart<Food>();
+	static Cart<Food> cart = new Cart<Food>();
+	static Scanner s = new Scanner(System.in);
+	static int mainInput = 0;
+	static int money = 100;
 	
     public static void main(String[] args) {
-
+    	start();
+    }
+    
+    public static void start () {
+    	Scanner subScanner = new Scanner(System.in);
+    	int subInput = 0;
+    	do {
+    		System.out.println("\n");
+    		System.out.println("You have $" + money + "\nWhat would you like to do?\n1. Check out\n2. Add items to cart\n3. Remove items from cart\n4. View items in cart");
+    		mainInput = s.nextInt();
+    		if (mainInput == 2) {
+    			System.out.println("What item do you want to add?\n1. Fried Chicken $10\n2. Sandwitch $6\n3. Chips $2\n4. Soda $2");
+    			subInput = subScanner.nextInt();
+    			switch (subInput) {
+    			case 1:
+    				cart.add(new FriedChicken());
+    				break;
+    			case 2:
+    				cart.add(new Sandwitch());
+    				break;
+    			case 3:
+    				cart.add(new Chips());
+    				break;
+    			case 4:
+    				cart.add(new Soda());
+    				break;
+    			}
+    			start();
+    		} else if (mainInput == 3) {
+    			System.out.println("Here is what is in your cart:");
+    			if (cart.length() == 0) {
+    				System.out.println("nothing.");
+    				start();
+    			} else {
+    				for (int i = 0; i < cart.length(); i++) {
+    					System.out.println((i + 1) + ". " + cart.get(i).getClass().getName());
+    				}
+    				System.out.println("Which one you you want to remove?");
+    			}
+    		}
+    	} while (mainInput != 1);
     }
 
 }

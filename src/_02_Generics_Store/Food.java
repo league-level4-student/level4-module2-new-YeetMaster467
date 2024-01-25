@@ -7,7 +7,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 public abstract class Food {
-    String item;
+    protected String item;
+    
+    protected int price;
 
     public abstract JLabel getFood();
 
