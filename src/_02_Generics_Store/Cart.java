@@ -14,9 +14,11 @@ import javax.swing.JPanel;
 @SuppressWarnings("unchecked")
 public class Cart<T extends Food> {
     private T[] cart;
+    private int amount;
 
     public Cart() {
         cart = (T[]) new Food[5];
+        amount = 0;
     }
 
     // Adds an item to the cart
@@ -24,6 +26,7 @@ public class Cart<T extends Food> {
         for (int i = 0; i < cart.length; i++) {
             if (cart[i] == null) {
                 cart[i] = item;
+                amount++;
                 return;
             }
         }
@@ -36,14 +39,13 @@ public class Cart<T extends Food> {
     }
     
     public void remove(int index) {
-    	T[] newArr = null;
-    	int k = 0;
+    	T[] newArr = (T[]) new Food[cart.length - 1];
     	for (int i = 0; i < cart.length - 1; i++) {
     		if (i != index) {
-    			newArr[k] = cart[i];
-    			k++;
+    			newArr[i] = cart[i];
     		}
     	}
+    	amount--;
     }
 
     // Displays everything currently in the cart
@@ -64,6 +66,6 @@ public class Cart<T extends Food> {
     }
 
     public int length() {
-        return cart.length;
+        return amount;
     }
 }

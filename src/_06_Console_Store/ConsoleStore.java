@@ -45,15 +45,36 @@ public class ConsoleStore {
 	static Cart<Food> cart = new Cart<Food>();
 	static Scanner s = new Scanner(System.in);
 	static int mainInput = 0;
-	static int money = 100;
+	static int money = 25;
+	static int totalPrice;
+	static Scanner subScanner = new Scanner(System.in);
+	static int subInput = 0;
 	
     public static void main(String[] args) {
     	start();
+    	for (int i = 0; i < cart.length(); i++) {
+    		totalPrice += cart.get(i).price;
+    	}
+    	if (totalPrice > money) {
+    		System.out.println("You don't have enough money to check out, please put some items back.");
+    		start();
+    	} else {
+    		money -= totalPrice;
+    		System.out.println("Please sign your name:");
+    		s.nextLine();
+    		String name = s.nextLine();
+    		System.out.println("\nRECEIPT");
+    		for (int i = 0; i < cart.length(); i++) {
+    			System.out.println(cart.get(i).toString() + "    $" + cart.get(i).price);
+    		}
+    		System.out.println("\nTOTAL    $" + totalPrice + "\nPAID BY " + name);
+    		cart.showCart();
+    		s.close();
+    		subScanner.close();
+    	}
     }
     
     public static void start () {
-    	Scanner subScanner = new Scanner(System.in);
-    	int subInput = 0;
     	do {
     		System.out.println("\n");
     		System.out.println("You have $" + money + "\nWhat would you like to do?\n1. Check out\n2. Add items to cart\n3. Remove items from cart\n4. View items in cart");
@@ -64,29 +85,39 @@ public class ConsoleStore {
     			switch (subInput) {
     			case 1:
     				cart.add(new FriedChicken());
-    				break;
+    				continue;
     			case 2:
     				cart.add(new Sandwitch());
-    				break;
+    				continue;
     			case 3:
     				cart.add(new Chips());
-    				break;
+    				continue;
     			case 4:
     				cart.add(new Soda());
-    				break;
+    				continue;
     			}
-    			start();
     		} else if (mainInput == 3) {
     			System.out.println("Here is what is in your cart:");
-    			if (cart.length() == 0) {
+    			if (cart.length() == 0 || cart == null) {
     				System.out.println("nothing.");
     				start();
     			} else {
     				for (int i = 0; i < cart.length(); i++) {
-    					System.out.println((i + 1) + ". " + cart.get(i).getClass().getName());
+    					System.out.println((i + 1) + ". " + cart.get(i).toString());
     				}
     				System.out.println("Which one you you want to remove?");
+    				subInput = subScanner.nextInt();
+    				cart.remove(subInput - 1);
+    				System.out.println("Item Removed.");
     			}
+    		} else if (mainInput == 4) {
+    			if (cart.length() == 0) {
+    				System.out.println("There is nothing in your cart.");
+    			} else {
+    				cart.showCart();
+    			}
+    		} else if (mainInput != 1){
+    			System.out.println("Enter a valid option");
     		}
     	} while (mainInput != 1);
     }

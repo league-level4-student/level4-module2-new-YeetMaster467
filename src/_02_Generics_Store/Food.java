@@ -9,7 +9,7 @@ import javax.swing.JLabel;
 public abstract class Food {
     protected String item;
     
-    protected int price;
+    public int price;
 
     public abstract JLabel getFood();
 
@@ -17,10 +17,15 @@ public abstract class Food {
     public static ImageIcon loadImage(String fileName) {
         try {
             return new ImageIcon(ImageIO
-                    .read(new Cart().getClass().getResourceAsStream("images/"+fileName)));
+                    .read(new Cart().getClass().getResourceAsStream("/_06_Console_Store/images/"+fileName)));
         } catch (IOException e) {
             e.printStackTrace();
             return null;
         }
+    }
+    
+    @Override
+    public String toString() {
+    	return item.replace(".jpg", "");
     }
 }
